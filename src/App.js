@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
+import { Container } from "react-bootstrap";
+
+import Navigation from "./components/Navigation.jsx";
+import Cards from "./components/Cards.jsx";
+import Home from "./components/Home.jsx";
+import NotFound from "./components/NotFound.jsx";
+
+const App = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Navigation getSearchTerm={(term) => setSearchTerm(term)} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/meals"
+            element={<Cards type="meals" searchTerm={searchTerm} />}
+          />
+          d
+          <Route
+            path="/drinks"
+            element={<Cards type="drinks" searchTerm={searchTerm} />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
-}
+};
 
 export default App;
