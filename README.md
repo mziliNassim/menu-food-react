@@ -1,70 +1,75 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Food Menu `Web Application`
 
-## Available Scripts
+[Website Preview](https://nassimmenufood.netlify.app/)
 
-In the project directory, you can run:
+A user-friendly web application that showcases a diverse selection of foods and beverages from around the world. With an intuitive layout, users can easily explore different cuisines and drinks, including popular regional dishes, international favorites, and various types of beverages. The application organizes menu items by food category and drink type, making it simple for users to discover new tastes and plan meals or gatherings.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Global Food Categories**:
+  > - Explore foods from different countries, organized by cuisine and region
+  >
+  > - Option to filter by categories such as appetizers, main courses, desserts, and street foods.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Comprehensive Drink Selection**:
+  > - Browse a variety of drinks, including non-alcoholic, alcoholic, hot, and cold beverages.
+  >
+  > - Filter by categories like smoothies, cocktails, coffee, tea, soft drinks, and more.
 
-### `npm test`
+- **Search and Filter Options**:
+  > - Advanced search bar to find specific dishes or drinks by name, ingredient, or region.
+  >
+  > - Filters to refine results by dietary preference (e.g., vegan, vegetarian, gluten-free) or popularity.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Responsive Design**:
+  > - Optimized for both desktop and mobile devices for easy browsing on any screen size.
 
-### `npm run build`
+- **Detailed Menu Item Descriptions**:
+  > - Each item includes a description, ingredients list, and origin information.
+  >
+  > - Photos accompany each dish and drink to showcase appearance and presentation.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technologies Used
+  
+- **React JS**: JavaScript library created by Facebook for building user interfaces, specifically for single-page applications.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Wikipedia API**: Used for retrieving search results and article content from Wikipedia.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## How to Use
 
-### `npm run eject`
+1 - Final Rusult from web :
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  ``` git
+    https://nassimmenufood.netlify.app/
+  ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2 - Clone this repository to your local machine:
+  
+  ``` bash
+    git clone https://github.com/mziliNassim/menu-food-react.git
+  ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3 - Open dirictory and install dependecise
+  
+  ``` bash
+    cd menu-food-react
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    git install
+  ```
 
-## Learn More
+4 - Start the project
+  
+  ``` bash
+    npm run start
+  ```
+  
+5 - the app in the development mode
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  ``` bash
+    http://localhost:3000
+  ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  > The page will reload when you make changes
+  >
+  > You may also see any lint errors in the console.
