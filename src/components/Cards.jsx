@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import axios, { all } from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
 import Card from "./Card";
@@ -10,9 +10,12 @@ import Paginationx from "./Paginationx.jsx";
 
 const Cards = ({ allData, type, searchTerm }) => {
   const [loading, setLoading] = useState(true);
-  const [filterddata, setFilterdData] = useState([]);
-  const [pagesNums, setPagesNums] = useState(0);
+  const [filterdData, setFilterdData] = useState([]);
+  const [pagedData, setPagedData] = useState([]);
+  const [numPages, setNumPages] = useState(0);
+
   const pageId = useParams().id;
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (searchTerm !== "") {
@@ -29,27 +32,56 @@ const Cards = ({ allData, type, searchTerm }) => {
   }, [searchTerm]);
 
   useEffect(() => {
-    if (pageId) {
-      alert(`pageId :  ${pageId}`);
+    if (allData.length == 0) {
+      setFilterdData([]);
+    } else {
+      setNumPages(Math.ceil(allData.length / 10));
     }
-  }, [pageId]);
+  }, [allData]);
+
+  useEffect(() => {
+    if (pageId) {
+      setPagedData([]);
+      let maxCard = pageId * 10;
+      let dataPage = allData.filter((data, i) => {
+        if (i > maxCard - 10 && i <= maxCard) {
+          return data;
+        }
+      });
+      setPagedData(dataPage);
+    } else navigate("/meals/1");
+  }, [pageId, allData]);
+
+  const getSelectedPage = (selected) => {
+    navigate(`/meals/${selected + 1}`);
+  };
 
   return (
     <>
-      {pagesNums !== 0 && <Paginationx pagesNums={pagesNums} />}
       <Loding loading={loading} />
       <Container>
         <div className={`cards mt-5 pt-5 ${type}`}>
           {searchTerm == "" ? (
-            allData.map((infos, index) =>
-              infos ? <Card infos={infos} key={index} type={type} /> : null
+            pagedData.length > 0 ? (
+              pagedData.map((infos, index) =>
+                infos ? <Card infos={infos} key={index} type={type} /> : null
+              )
+            ) : (
+              <AlertMsg msg={`Invalid ${type} !!`} />
             )
-          ) : filterddata.length == 0 ? (
+          ) : filterdData.length == 0 ? (
             <AlertMsg msg={`Invalid ${type} for term you are searching!!`} />
           ) : (
-            filterddata.map((infos, index) => (
+            filterdData.map((infos, index) => (
               <Card infos={infos} key={index} type={type} />
             ))
+          )}
+          {pageId !== 0 && (
+            <Paginationx
+              numPages={numPages}
+              pageId={pageId}
+              getSelectedPage={getSelectedPage}
+            />
           )}
         </div>
       </Container>

@@ -9,7 +9,7 @@ import Navigation from "./components/Navigation.jsx";
 import Cards from "./components/Cards.jsx";
 import Home from "./components/Home.jsx";
 import NotFound from "./components/NotFound.jsx";
-import Paginationx from "./components/Paginationx.jsx";
+import ToTop from "./components/ToTop.jsx";
 
 const App = () => {
   const [allDataMeals, setAllDataMeals] = useState([]);
@@ -26,6 +26,7 @@ const App = () => {
         }
         setAllDataMeals(allDataFetch);
       } catch (error) {
+        setAllDataMeals([]);
         console.log("Error:", error);
       }
     }
@@ -41,6 +42,7 @@ const App = () => {
         }
         setAllDataDrinks(allDataFetch);
       } catch (error) {
+        setAllDataDrinks([]);
         console.log("Error:", error);
       }
     }
@@ -82,9 +84,9 @@ const App = () => {
               />
             }
           ></Route>
-
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <ToTop />
       </BrowserRouter>
     </>
   );

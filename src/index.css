@@ -151,3 +151,12 @@ body {
   bottom: 0;
   right: 0;
 }
+/* =========== toTop =========== */
+.toTop {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  font-size: 20px;
+}
+
+/* ===========  =========== */

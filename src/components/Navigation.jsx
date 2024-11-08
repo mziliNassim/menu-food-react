@@ -108,7 +108,7 @@ const Navigation = ({ getSearchTerm }) => {
               <Form className="d-flex">
                 {/* <Link to="/login">
                   <Button variant="outline-primary d-flex align-items-center gap-2">
-                    <i class="bi bi-person-fill-lock"></i>
+                    <i className="bi bi-person-fill-lock"></i>
                     Login
                   </Button>
                 </Link> */}

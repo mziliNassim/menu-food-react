@@ -2,20 +2,17 @@ import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 
-const Paginationx = ({ pagesNums }) => {
-  const navigate = useNavigate();
-
+const Paginationx = ({ numPages, getSelectedPage }) => {
   return (
     <>
       <ReactPaginate
         breakLabel="..."
         nextLabel="next >"
         previousLabel="< previous"
-        onPageChange={() => navigate(`/meals/${pagesNums}`)}
-        // pageCount={numPages} ==> No Movies In Pages over 500
-        pageCount={500}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={3}
+        onPageChange={({ selected }) => getSelectedPage(selected)}
+        pageCount={numPages}
+        pageRangeDisplayed={2}
+        marginPagesDisplayed={2}
         containerClassName={"pagination my-5 justify-content-center"}
         pageClassName={"page-item"}
         previousClassName={"page-item"}

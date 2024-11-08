@@ -18,21 +18,21 @@ const Home = () => {
 
   return (
     <>
-      <div class="home p-0">
+      <div className="home p-0">
         {loading ? (
           <Loding loading={loading} />
         ) : (
-          <div class=" pt-5">
-            <div class="bg-dark hero-header p-4">
-              <div class="container">
-                <div class="row align-items-center">
-                  <div class="col-lg-6 text-center text-lg-start">
-                    <h1 class="fw-semibold display-3 text-white animated slideInLeft">
+          <div className=" pt-5">
+            <div className="bg-dark hero-header p-4">
+              <div className="container">
+                <div className="row align-items-center">
+                  <div className="col-lg-6 text-center text-lg-start">
+                    <h1 className="fw-semibold display-3 text-white animated slideInLeft">
                       Enjoy Our
                       <br />
                       Meals, Drinks
                     </h1>
-                    <p class="text-white animated slideInLeft my-4 pb-2">
+                    <p className="text-white animated slideInLeft my-4 pb-2">
                       Indulge in our delightful selection of meals and
                       refreshing drinks, crafted to satisfy your taste buds with
                       flavors that are both bold and comforting. Every dish and
@@ -46,7 +46,7 @@ const Home = () => {
                     </p>
                     <Link
                       to="/about"
-                      class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft fw-semibold"
+                      className="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft fw-semibold"
                     >
                       About{" "}
                       <span className="nunito-font text-warning ">
@@ -54,8 +54,8 @@ const Home = () => {
                       </span>
                     </Link>
                   </div>
-                  <div class="col-lg-6 text-center text-lg-end overflow-hidden">
-                    <img class="img-fluid" src={hero} alt="hero" />
+                  <div className="col-lg-6 text-center text-lg-end overflow-hidden">
+                    <img className="img-fluid" src={hero} alt="hero" />
                   </div>
                 </div>
               </div>

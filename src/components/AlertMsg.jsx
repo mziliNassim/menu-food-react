@@ -17,10 +17,14 @@ const AlertMsg = ({ msg }) => {
   let variant = "warning";
   return (
     <>
-      <Alert key={variant} variant={variant} className="m-auto text-center">
+      <Alert
+        key={variant}
+        variant={variant}
+        className="m-auto text-center px-5"
+      >
         {msg}{" "}
         <NavLink to="/meals" className="text text-{variant}">
-          <strong className="">All Meals</strong>
+          {/* <strong className="">All Meals</strong> */}
         </NavLink>
       </Alert>
     </>
