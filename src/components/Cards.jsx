@@ -1,53 +1,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
-
-import { letters, urlMealsByLetter, urlDrinksByLetter } from "../data/data.js";
 
 import Card from "./Card";
 import Loding from "./Loding";
 import AlertMsg from "./AlertMsg";
+import Paginationx from "./Paginationx.jsx";
 
-const Cards = ({ type, searchTerm }) => {
-  const location = useLocation();
-  const [allData, setAllData] = useState([]);
-  const [filterddata, setFilterdData] = useState([]);
+const Cards = ({ allData, type, searchTerm }) => {
   const [loading, setLoading] = useState(true);
-
-  const fetchDataAxios = async (url) => {
-    setLoading(true);
-    setAllData([]);
-    let allDataFetch = [];
-    for (let letter of letters) {
-      try {
-        const response = await axios.get(url + letter);
-        if (location.pathname == "/meals") {
-          if (response.data.meals)
-            allDataFetch = [...allDataFetch, ...response.data.meals];
-        } else {
-          if (response.data.drinks)
-            allDataFetch = [...allDataFetch, ...response.data.drinks];
-        }
-      } catch (error) {
-        console.log("Error:", error);
-      }
-    }
-    if (allDataFetch.length > 0) {
-      setAllData(allDataFetch);
-      setLoading(false);
-    }
-  };
+  const [filterddata, setFilterdData] = useState([]);
+  const [pagesNums, setPagesNums] = useState(0);
+  const pageId = useParams().id;
 
   useEffect(() => {
-    if (allData.length == 0) {
-      if (location.pathname === "/meals") {
-        fetchDataAxios(urlMealsByLetter);
-      } else if (location.pathname === "/drinks") {
-        fetchDataAxios(urlDrinksByLetter);
-      }
-    }
     if (searchTerm !== "") {
+      setLoading(true);
       setFilterdData([]);
       let filteredData__ = allData.filter(
         (el) =>
@@ -55,15 +24,22 @@ const Cards = ({ type, searchTerm }) => {
           el.strMeal.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilterdData(filteredData__);
-      return;
     }
-  }, [location, searchTerm]);
+    setLoading(false);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (pageId) {
+      alert(`pageId :  ${pageId}`);
+    }
+  }, [pageId]);
 
   return (
     <>
+      {pagesNums !== 0 && <Paginationx pagesNums={pagesNums} />}
       <Loding loading={loading} />
       <Container>
-        <div className={`cards mt-3 ${type}`}>
+        <div className={`cards mt-5 pt-5 ${type}`}>
           {searchTerm == "" ? (
             allData.map((infos, index) =>
               infos ? <Card infos={infos} key={index} type={type} /> : null

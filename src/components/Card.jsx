@@ -12,13 +12,13 @@ const Card = ({ infos, type }) => {
           alt="{meal.strMeal}"
         />
         <div className="card-body position-relative">
-          <h2 className="card-title">
+          <h2 className="card-title text-light">
             {type == "meals" ? infos.strMeal : infos.strCategory}
           </h2>
-          <h4 className="card-title my-3">
+          <h4 className="card-title my-3 text-light">
             {type == "meals" ? infos.strArea : infos.strDrink}
           </h4>
-          <p className="card-text desc">
+          <p className="card-text desc text-light">
             <span>{infos.strInstructions.slice(0, 500) + "..."}</span>
           </p>
           <div className="events d-flex align-items-center justify-content-end position-absolute">
