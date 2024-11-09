@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import {
   Container,
   Navbar,
@@ -11,14 +11,28 @@ import {
   Button,
 } from "react-bootstrap";
 
-const Navigation = ({ getSearchTerm }) => {
+const Navigation = ({ isLogedIn }) => {
+  const [type, setType] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
   const expand = "md";
 
+  useEffect(() => {
+    if (location.pathname.startsWith("/meals")) setType("meals");
+    else if (location.pathname.startsWith("/drinks")) setType("drinks");
+    else setType("");
+  }, [location]);
+
   const handleSearch = (e) => {
-    // if (e.target.value == "") navigate(`/meals`);
-    // else navigate(`/meals/${e.target.value}`);
-    getSearchTerm(e.target.value);
+    e.preventDefault();
+    if (e.target.value == "") {
+      navigate(`/${type}/1`);
+    } else navigate(`/${type}/${e.target.value}/1`);
+  };
+
+  const handleClickLogout = () => {
+    localStorage.removeItem("loginUser");
+    navigate("/auth/signin");
   };
 
   return (
@@ -56,6 +70,7 @@ const Navigation = ({ getSearchTerm }) => {
                 ResToresT
               </Offcanvas.Title>
             </Offcanvas.Header>
+
             <Offcanvas.Body className="">
               <Nav className="align-items-center   justify-content-end flex-grow-1 pe-3">
                 <NavLink
@@ -70,48 +85,60 @@ const Navigation = ({ getSearchTerm }) => {
                 >
                   Drinks
                 </NavLink>
-
-                {/* <Dropdown>
-                  <Dropdown.Toggle
-                    className="navLink bg-transparent border-none"
-                    id="dropdown-basic"
-                  >
-                    Favorits
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu
-                    className="navBar"
-                    style={{ background: "#0f172b" }}
-                  >
-                    <Dropdown.Item className="dropdown bg-transparent">
-                      <Link to="/favorites/meals" className="dropdownNavLink ">
-                        Meals
-                      </Link>
-                    </Dropdown.Item>
-                    <Dropdown.Item className="dropdown bg-transparent">
-                      <Link to="/favorites/drinks" className="dropdownNavLink ">
-                        Drinks
-                      </Link>
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown> */}
               </Nav>
-              <Form onSubmit={(e) => e.preventDefault()} className="d-flex">
-                <Form.Control
-                  type="search"
-                  placeholder="Search a menu..."
-                  className="me-2"
-                  aria-label="Search"
-                  onChange={handleSearch}
-                />
-              </Form>
-              <Form className="d-flex">
-                {/* <Link to="/login">
-                  <Button variant="outline-primary d-flex align-items-center gap-2">
-                    <i className="bi bi-person-fill-lock"></i>
-                    Login
-                  </Button>
-                </Link> */}
+
+              <Form className="d-flex" onSubmit={(e) => e.preventDefault()}>
+                {type && (
+                  <Form.Control
+                    type="search"
+                    placeholder="Search a menu..."
+                    className="me-2"
+                    aria-label="Search"
+                    onChange={handleSearch}
+                  />
+                )}
+
+                {!isLogedIn ? (
+                  <Link to="/auth/signin" className="text-decoration-none">
+                    <Button variant="outline-primary d-flex align-items-center gap-2">
+                      <i className="bi bi-person-fill-lock"></i>
+                      <span>Login</span>
+                    </Button>
+                  </Link>
+                ) : (
+                  <Dropdown>
+                    <Dropdown.Toggle
+                      variant="outline-warning"
+                      className=" d-flex align-items-center gap-2"
+                      id="dropdown-basic"
+                    >
+                      <i className="bi bi-person-circle"></i>
+                      <span className="text-uppercase">
+                        {localStorage.getItem("loginUser") &&
+                          JSON.parse(localStorage.getItem("loginUser"))
+                            .username}
+                      </span>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                      <Dropdown.Item>
+                        <Link
+                          to="/favorites"
+                          className="text text-decoration-none text-dark"
+                        >
+                          favorites
+                        </Link>
+                      </Dropdown.Item>
+                      <Dropdown.Divider />
+                      <Dropdown.Item onClick={handleClickLogout}>
+                        <span className="text text-decoration-none text-dark">
+                          Logout
+                        </span>
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                )}
               </Form>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

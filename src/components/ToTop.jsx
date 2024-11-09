@@ -18,7 +18,8 @@ const ToTop = () => {
       {activeToTop && (
         <Button
           onClick={() => window.scrollTo(0, 0)}
-          className="toTop  text-light"
+          className="arrow toTop text-light btn btn-secondary"
+          style={{ right: "40px", bottom: "40px" }}
         >
           <i className="bi bi-arrow-up-circle"></i>
         </Button>

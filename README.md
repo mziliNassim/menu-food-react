@@ -34,7 +34,11 @@ A user-friendly web application that showcases a diverse selection of foods and 
   
 - **React JS**: JavaScript library created by Facebook for building user interfaces, specifically for single-page applications.
 
-- **Wikipedia API**: Used for retrieving search results and article content from Wikipedia.
+- **API 1**:
+
+- **API 2**:
+
+- **React-Bootstrap**:
 
 ## How to Use
 

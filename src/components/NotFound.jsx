@@ -5,8 +5,8 @@ const NotFound = () => {
   return (
     <>
       <div className="container">
-        <div className="notfound my-5 py-5">
-          <div className="row">
+        <div className="notfound pt-5">
+          <div className="row  my-5">
             <div className="col-md-6 align-self-center">
               <svg version="1.1" viewBox="0 0 800 600">
                 <g className="text-light">

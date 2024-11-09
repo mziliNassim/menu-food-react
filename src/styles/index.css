@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Pacifico&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap");
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,23 +11,32 @@
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-height: 100vh;
-  height: 100vh;
   background: #131727;
+  height: 100vh;
+  min-height: 100vh;
 }
 .nunito-font {
+  font-style: normal;
+  font-weight: 800;
   font-family: "Nunito Sans", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 800;
+}
+.pacifico-regular-font {
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
   font-style: normal;
 }
 .bg__ {
   background: #131727;
 }
 .slideInLeft {
-  animation-name: slideInLeft;
   animation-duration: 1s;
   animation-fill-mode: both;
+  animation-name: slideInLeft;
+}
+.icon {
+  cursor: pointer;
+  font-style: 15px;
 }
 /* =========== Animation =========== */
 @keyframes imgRotate {
@@ -40,26 +50,38 @@ body {
     visibility: visible;
   }
 }
-
+@keyframes slideIn {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate {
+  animation: slideIn 0.5s ease forwards;
+}
 /* =========== NavBar =========== */
 .navBar {
-  box-shadow: 0px 5px 10px #fff1;
-  width: 100%;
-  background: #f8f9fa;
-  background: #0f172b;
   top: 0;
   z-index: 999;
+  box-shadow: 0px 5px 10px #fff1;
+  background: #f8f9fa;
+  background: #0f172b;
+  width: 100%;
 }
 .navBar .navLink,
 .navBar .dropdownNavLink {
-  color: #f8f9fa;
   border: none;
+  color: #f8f9fa;
 }
 .navBar .navLink.active,
 .navBar .navLink:hover,
 .navBar .dropdownNavLink:hover {
-  color: #ffc107;
   border: none;
+  color: #ffc107;
 }
 .navBar .dropdownNavLink {
   width: 100%;
@@ -73,10 +95,10 @@ body {
 }
 .hero-header {
   background: linear-gradient(rgba(15, 23, 43, 0.9), rgba(15, 23, 43, 0.9)),
-    url(./img/bg-hero.jpg);
+    url(../img/bg-hero.jpg);
   background-position: center center;
-  background-repeat: no-repeat;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .hero-header img {
@@ -117,29 +139,32 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-template-columns: repeat(1, minmax(300px, 1fr));
   gap: 20px;
-  width: 100%;
   padding: 20px;
+  width: 100%;
 }
 .cards.drinks {
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+  grid-template-columns: repeat(3, 1fr);
 }
 .card_ {
   display: flex;
   justify-content: center;
   gap: 20px;
-  /* border: 1px solid #dee2e6; */
-  border-radius: 10px;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transform: translateY(50px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
   box-shadow: 0 2px 10px #0000001a;
+  border-radius: 10px;
   background-color: #202435;
   padding: 20px;
 }
+
 .cards.drinks .card_ {
   flex-direction: column;
 }
+
 .card_ img {
-  width: 250px;
   border-radius: inherit;
+  width: 250px;
 }
 .cards.drinks .card_ img {
   width: 100%;
@@ -148,15 +173,35 @@ body {
   text-decoration: underline;
 }
 .card_ .events {
-  bottom: 0;
   right: 0;
+  bottom: 0;
 }
-/* =========== toTop =========== */
-.toTop {
+/* =========== toTop // toBottom =========== */
+.arrow {
   position: fixed;
-  right: 40px;
-  bottom: 40px;
   font-size: 20px;
 }
 
+/* =========== Auth =========== */
+.auth {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.auth form {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  margin: auto;
+  background-color: #202435;
+  border-radius: 10px;
+  padding: 40px;
+  box-shadow: 0 2px 10px #ffffff1a;
+  width: 550px;
+  transform: translateY(50px);
+}
+
+/* =========== Footer =========== */
+footer {
+  box-shadow: 0 2px 10px #ffffff1a;
+  background: #131727;
+}
 /* ===========  =========== */
