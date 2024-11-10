@@ -5,3 +5,6 @@ export const letters = Array.from({ length: 26 }, (_, i) =>
 export const urlMealsByLetter = `https://www.themealdb.com/api/json/v1/1/search.php?f=`;
 
 export const urlDrinksByLetter = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=`;
+
+// { username: "", email: "", password: "" }
+

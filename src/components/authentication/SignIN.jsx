@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Container } from "react-bootstrap";
+import { Button, Form, Container, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import Auth from "./Auth";
 
 const SignIN = ({ isLogedIn }) => {
   const navigate = useNavigate();
@@ -8,59 +9,85 @@ const SignIN = ({ isLogedIn }) => {
   const [loginUser, setLoginUser] = useState({
     username: "",
     password: "",
-    checked: true,
   });
 
   useEffect(() => {
     if (isLogedIn) navigate("/");
   }, [isLogedIn]);
 
-  // check validtion of data (username and password)
-  const validData = () => {
-    return true;
-  };
-
   const handleChnageSingIn = (e) => {
-    const { value, name, checked, type } = e.target;
+    const { value, name } = e.target;
     setLoginUser({
       ...loginUser,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
     });
+  };
+
+  // check validtion of data (user exist in DB)
+  const validData = () => {
+    let users = JSON.parse(localStorage.getItem("users"));
+    let signingUser = {
+      username: loginUser.username,
+      password: loginUser.password,
+    };
+    for (let user of users) {
+      if (user.username == signingUser.username) {
+        if (user.password == signingUser.password) {
+          setAlert({ msg: "loging successfly !!!", type: "success" });
+          return true;
+        }
+      }
+    }
+    setAlert({
+      msg: "Invalid username or password!!",
+      type: "warning",
+    });
+    return false;
   };
 
   const handleSubmitSingIn = (e) => {
     e.preventDefault();
-    if (loginUser.name == "" || loginUser.password == "")
-      // setAlert({ msg: "Empty feilds !!!", type: "warnig" });
-      window.alert("mpty feilds !!!");
-    else {
-      if (!validData())
-        setAlert({ msg: "Invalid Username Or Password !!!", type: "warnig" });
-      else {
-        localStorage.setItem(
-          "loginUser",
-          JSON.stringify({
-            username: loginUser.username,
-            password: loginUser.password,
-          })
-        );
+    if (validData()) {
+      localStorage.setItem(
+        "loginUser",
+        JSON.stringify({
+          username: loginUser.username,
+          password: loginUser.password,
+        })
+      );
+      setTimeout(() => {
         navigate("/");
-      }
+      }, 200);
     }
+    setTimeout(() => {
+      setAlert({
+        msg: "",
+        type: "",
+      });
+    }, 2000);
   };
 
   return (
     <>
+      <Auth />
       <div className="auth">
         <Container>
           <Form
             onSubmit={handleSubmitSingIn}
-            className="animate text-light"
+            className="animate text-light form"
             style={{ justifyContent: "flex-end" }}
           >
+            {alert.msg && (
+              <Alert variant={alert.type} className="text-center p-2">
+                {alert.msg}
+              </Alert>
+            )}
+
             <Form.Group className="mb-4" controlId="formBasicTitle">
               <h1 className="nunito-font ">Sign IN</h1>
             </Form.Group>
+
+            <hr className="text-center my-4" />
 
             <Form.Group className="mb-1" controlId="formBasicUsername">
               <Form.Label className="">Username</Form.Label>
@@ -88,42 +115,28 @@ const SignIN = ({ isLogedIn }) => {
             </Form.Group>
 
             <Form.Group
-              className="mb-3 d-flex align-items-start justify-content-between"
+              className="mb-3 d-flex align-items-start gap-3"
               controlId="formBasicCheckbox"
             >
-              <div className="d-flex align-items-start gap-3">
-                <Form.Check
-                  type="checkbox"
-                  name="checked"
-                  checked={loginUser.checked}
-                  onChange={handleChnageSingIn}
-                  id="checked"
-                />
-                <label htmlFor="checked">
-                  <span>I agree to the </span>
-                  <Link
-                    to="/termsandconditions"
-                    className="text-decoration-none"
-                  >
-                    Terms and Conditions
-                  </Link>
-                  <span> and the </span>
-                  <Link to="/cookiepolicy" className="text-decoration-none">
-                    Cookie Policy
-                  </Link>
-                  <span>.</span>
-                </label>
-              </div>
-              <Link to="/auth/signup">Sign UPS</Link>
+              <Link to="mdps">
+                <p>Mot de passe oublié ?</p>
+              </Link>
             </Form.Group>
 
             <Form.Group
-              className="d-flex justify-content-end"
-              controlId="formBasicCheckbox"
+              className="d-flex justify-content-end mt-2"
+              controlId="formBasicSubmit"
             >
               <Button variant="primary" type="submit" className="px-5">
-                Submit
+                Login
               </Button>
+            </Form.Group>
+
+            <hr className="text-center my-4" />
+
+            <Form.Group className="text-center" controlId="formBasicCheckbox">
+              <span>Don't have account</span>{" "}
+              <Link to="/auth/signup">Sign UP</Link>
             </Form.Group>
           </Form>
         </Container>
