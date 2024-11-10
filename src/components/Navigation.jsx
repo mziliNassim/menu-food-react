@@ -18,6 +18,7 @@ const Navigation = ({ isLogedIn }) => {
   const expand = "md";
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (location.pathname.startsWith("/meals")) setType("meals");
     else if (location.pathname.startsWith("/drinks")) setType("drinks");
     else setType("");
